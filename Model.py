@@ -67,7 +67,6 @@ class GraphConv(Module):
                               bias = True)
 
     def forward(self,x):
-        '''
         for i,a in enumerate(self.adj):
             x = x.view(-1,self.num_node)
             xa = torch.mm(x,a)
@@ -76,13 +75,6 @@ class GraphConv(Module):
                 output = self.conv(xa)
             else:
                 output = output + self.conv(xa)
-        '''
-        x = x.view(-1, self.num_node)
-        x = torch.mm(x, self.adj)
-        x = x.view(-1, self.in_channel, self.sides, self.sides)
-        output = self.conv(x)
-        print('aaaa')
-        print(output.size())
 
         output = F.relu(output)
 
